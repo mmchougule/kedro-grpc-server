@@ -5,16 +5,16 @@
 [![Python Version](https://img.shields.io/badge/python-3.6%20%7C%203.7-blue.svg)]()
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-This is a beta Kedro plugin that creates a gRPC server for your kedro pipelines. Kedro gRPC Server RPC calls can be triggered using any of the programming languages that support gRPC.
+This is a Kedro plugin that creates a gRPC server for your kedro pipelines. Kedro gRPC Server RPC calls can be triggered using any of the programming languages that support gRPC.
 
 Kedro gRPC clients can be in many programming languages.
 
 Some kedro client examples below that call RPCs on a gRPC server running in any kedro project:
-- [Python]()
-- [Go]()
-- [Scala]()
+- [Python](https://github.com/mmchougule/kedro-grpc-server/blob/master/grpc_client_examples/python/grpc_client.py)
+- [Go](https://github.com/mmchougule/kedro-grpc-go-client/)
+- [Scala](https://github.com/mmchougule/kedro-grpc-scala-client)
 - [Java]()
-- [Node]()
+- [Node](https://github.com/mmchougule/kedro-grpc-node-client)
 - C++
 - C#
 - Kotlin
