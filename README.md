@@ -69,7 +69,7 @@ Similarly, you can set the port number using `--port`.
 
 ## gRPC API
 
-Exposing 3 RPC calls similar to the REST server:
+Exposing 3 RPC calls:
 
 `ListPipelines` -> Returns current list of pipelines
 
