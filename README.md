@@ -18,7 +18,7 @@ Kedro gRPC clients can be in many programming languages.
 Some kedro client examples below that call RPCs on a gRPC server running in any kedro project:
 - [Python](https://github.com/mmchougule/kedro-grpc-server/blob/master/grpc_client_examples/python/grpc_client.py)
 - [Go](https://github.com/mmchougule/kedro-grpc-go-client/)
-- [Scala]()
+- [Scala](https://github.com/mmchougule/kedro-grpc-scala-client)
 - [Java](https://github.com/mmchougule/kedro-grpc-java-client)
 - [Node](https://github.com/mmchougule/kedro-grpc-node-client)
 - C++
