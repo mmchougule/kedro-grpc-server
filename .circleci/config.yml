@@ -1,0 +1,132 @@
+version: 2
+
+
+images:
+  py36: &py36
+    - image: 'circleci/python:3.6.4'
+      environment:
+        PYTHON_VERSION: '36'
+  py37: &py37
+    - image: 'circleci/python:3.7.0'
+      environment:
+        PYTHON_VERSION: '37'
+
+
+utils:
+  setup_requirements: &setup_requirements
+    name: Install PIP dependencies
+    command: |
+      python3 -m venv venv
+      . venv/bin/activate
+      pip install -U "pip>=18.0, <19.0" "setuptools>=38.0, <39.0" wheel
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      pip install -r test_requirements.txt
+      # conda install -y virtualenv   # venv is required for some pre-commit hooks, move to docker
+      echo "Python version: $(python --version 2>&1)"
+      echo "PIP version: $(pip -V 2>&1)"
+      echo "Kedro version: $(kedro -V 2>&1)"
+
+  setup_pre_commit: &setup_pre_commit
+    name: Install pre-commit hooks
+    command: |
+      . venv/bin/activate
+      pre-commit install --install-hooks
+      pre-commit install --hook-type pre-push
+
+  linters: &linters
+    name: Run pylint and flake8
+    command: |
+      . venv/bin/activate
+      make lint
+
+  unit_tests: &unit_tests
+    name: Run tests
+    command: |
+      . venv/bin/activate
+      make test
+
+  publish_github: &publish_github
+    name:
+    command: |
+      VERSION=$(tools/python_version.sh kedro_server)
+      tools/github_release.sh ${CIRCLE_PROJECT_USERNAME} ${CIRCLE_PROJECT_REPONAME} ${GITHUB_TOKEN} ${VERSION}
+
+  check_legal: &check_legal
+    name: Check for legal compliance
+    command: make legal
+
+  install_package: &install_package
+    name: Install the package
+    command: |
+      . venv/bin/activate
+      pip install --upgrade pip
+      make install
+
+
+jobs:
+  unit_tests_36:
+    docker: *py36
+    steps:
+      - checkout
+      - run: *setup_requirements
+      - run: *unit_tests
+
+  unit_tests_37:
+    docker: *py37
+    steps:
+      - checkout
+      - run: *setup_requirements
+      - run: *unit_tests
+
+  linters_36:
+    docker: *py36
+    steps:
+      - checkout
+      - run: *setup_requirements
+      - run: *setup_pre_commit
+      - run: *linters
+      - run: *check_legal
+      - run: *install_package
+
+  linters_37:
+    docker: *py37
+    steps:
+      - checkout
+      - run: *setup_requirements
+      - run: *setup_pre_commit
+      - run: *linters
+      - run: *check_legal
+      - run: *install_package
+
+  all_circleci_checks_succeeded:
+    docker:
+      - image: circleci/python  # any light-weight image
+    steps:
+      - run:
+          name: Success!
+          command: echo "All checks passed"
+
+  release_master:
+    docker: *py37
+    steps:
+      - checkout
+      - run: *setup_requirements
+      - run: *install_package
+      - run: *publish_github
+
+
+workflows:
+  version: 2
+  regular:
+    jobs:
+      - unit_tests_36
+      - unit_tests_37
+      - linters_36
+      - linters_37
+      - all_circleci_checks_succeeded:
+          requires:
+            - unit_tests_36
+            - unit_tests_37
+            - linters_36
+            - linters_37

@@ -1,0 +1,13 @@
+[report]
+fail_under=93
+show_missing=True
+omit =
+    # omit conftest
+    *conftest*
+    # omit generated pb2 files from protobuf compiler grpcio-tools
+    *kedro_pb2*
+    *kedro_pb2_grpc*
+
+exclude_lines =
+    pragma: no cover
+    raise NotImplementedError

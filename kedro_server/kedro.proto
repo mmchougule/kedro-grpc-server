@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package kedro;
+
+service Kedro {
+
+  rpc ListPipelines(PipelineParams) returns (PipelineSummary);
+  rpc Run(RunParams) returns (RunSummary);
+  rpc Status(RunId) returns (stream RunStatus) {}
+
+}
+
+message RunSummary {
+  string run_id = 1;
+  string success = 2;
+}
+
+message RunParams {
+  string pipeline_name = 1;
+  string tags = 2;
+}
+
+message PipelineSummary {
+  repeated string pipeline = 1;
+}
+
+message PipelineParams {}
+
+message RunId {
+  string run_id = 1;
+}
+
+message RunStatus {
+  repeated string events = 1;
+  string exit_code = 2;
+  string run_id = 3;
+  string success = 4;
+  string run_status = 5;
+}

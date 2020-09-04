@@ -1,0 +1,6 @@
+click>=7.0, <8.0
+connexion[swagger-ui] >= 2.0
+flask
+grpcio==1.30.0
+grpcio-tools==1.30.0
+kedro >= 0.15.2  # to work with modular pipelines
