@@ -7,6 +7,12 @@
 
 This is a Kedro plugin that creates a gRPC server for your kedro pipelines. Kedro gRPC Server RPC calls can be triggered using any of the programming languages that support gRPC.
 
+Demo:
+
+![gRPC server](https://github.com/mmchougule/kedro-grpc-server/blob/master/docs/images/kedro_grpc_server.gif)
+![Go Kedro Client](https://github.com/mmchougule/kedro-grpc-server/blob/master/docs/images/go_client_kedro.gif)
+
+
 Kedro gRPC clients can be in many programming languages.
 
 Some kedro client examples below that call RPCs on a gRPC server running in any kedro project:
