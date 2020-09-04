@@ -40,7 +40,7 @@ Kedro gRPC Server requires [Python 3.6+](https://realpython.com/installing-pytho
 You can install Kedro gRPC Server directly from GitHub with:
 
 ```bash
-pip install git+https://github.com/mmchougule/kedro-grpc-server.git
+pip install kedro-grpc-server
 ```
 
 ## How do I use Kedro gRPC Server?
