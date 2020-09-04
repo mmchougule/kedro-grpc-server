@@ -5,7 +5,7 @@
 [![Python Version](https://img.shields.io/badge/python-3.6%20%7C%203.7-blue.svg)]()
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-This is a Kedro plugin that creates a gRPC server for your kedro pipelines. Kedro gRPC Server RPC calls can be triggered using any of the programming languages that support gRPC.
+This is a Kedro plugin that creates a gRPC server for your kedro pipelines. Exposed RPC calls can be triggered using any of the programming languages that support gRPC.
 
 Demo:
 
@@ -87,7 +87,3 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for:
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. The best way to safely upgrade is to check our [release notes](RELEASE.md) for any notable breaking changes.
-
-## What licence do you use?
-
-See [LICENSE](LICENSE.md) for guidelines.
