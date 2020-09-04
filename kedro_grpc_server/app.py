@@ -4,8 +4,8 @@ from typing import Dict
 
 import click
 
-from kedro_server.grpc_server import grpc_serve
-from kedro_server.process_manager import ProcessManager
+from kedro_grpc_server.grpc_server import grpc_serve
+from kedro_grpc_server.process_manager import ProcessManager
 
 HOST_HELP = """Host which the server will listen to. Defaults to 127.0.0.1."""
 PORT_HELP = """TCP port which the server will listen to. Defaults to 4141."""

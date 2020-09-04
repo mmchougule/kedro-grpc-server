@@ -14,17 +14,16 @@ from kedro.io import DataCatalog
 from kedro.pipeline import Pipeline, node
 from kedro.versioning import Journal
 
-# from kedro_server import process_manager
-from kedro_server import process_manager
-from kedro_server.grpc_server import (  # type: ignore
+from kedro_grpc_server import process_manager
+from kedro_grpc_server.grpc_server import (  # type: ignore
     RUN_STATES,
     KedroGrpcServerException,
     KedroServer,
     grpc_serve,
 )
-from kedro_server.kedro_pb2 import RunId, RunParams  # type: ignore
-from kedro_server.kedro_pb2_grpc import add_KedroServicer_to_server  # type: ignore
-from kedro_server.process_manager import ProcessManager
+from kedro_grpc_server.kedro_pb2 import RunId, RunParams  # type: ignore
+from kedro_grpc_server.kedro_pb2_grpc import add_KedroServicer_to_server  # type: ignore
+from kedro_grpc_server.process_manager import ProcessManager
 
 _lock = Lock()  # pylint: disable=invalid-name
 _num_active_runs = Value("i", 0)
@@ -59,7 +58,7 @@ def fake_run_id(mocker):
         return ProcessManager(context=None, run_id="abc123")
 
     mocker.patch(
-        "kedro_server.process_manager.ProcessManager.run_id",
+        "kedro_grpc_server.process_manager.ProcessManager.run_id",
         new=get_proc_manager().run_id,
     )
 
@@ -121,7 +120,7 @@ def grpc_servicer(tmpdir_factory):
 
 @pytest.fixture(scope="module")
 def grpc_stub(grpc_channel):
-    from kedro_server.kedro_pb2_grpc import KedroStub
+    from kedro_grpc_server.kedro_pb2_grpc import KedroStub
 
     return KedroStub(grpc_channel)
 
@@ -161,7 +160,7 @@ def test_grpc_serve_no_context(tmpdir_factory):
 
 
 def test_get_pipelines(grpc_stub):
-    from kedro_server.kedro_pb2 import PipelineParams
+    from kedro_grpc_server.kedro_pb2 import PipelineParams
 
     request = PipelineParams()
     response = grpc_stub.ListPipelines(request)

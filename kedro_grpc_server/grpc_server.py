@@ -8,18 +8,17 @@ from typing import Any
 import grpc
 from kedro.framework.cli import get_project_context
 
-from kedro_server.kedro_pb2 import (  # type: ignore
+from kedro_grpc_server.kedro_pb2 import (  # type: ignore
     PipelineSummary,
     RunStatus,
     RunSummary,
 )
-from kedro_server.kedro_pb2_grpc import (  # type: ignore
+from kedro_grpc_server.kedro_pb2_grpc import (  # type: ignore
     KedroServicer,
     add_KedroServicer_to_server,
 )
-from kedro_server.process_manager import ProcessManager
+from kedro_grpc_server.process_manager import ProcessManager
 
-# from kedro_server.utils import _get_new_events, start_run_process
 
 RUN_STATES = {}
 

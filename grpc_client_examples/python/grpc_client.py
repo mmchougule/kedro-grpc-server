@@ -1,11 +1,11 @@
 import grpc
 
-from kedro_server.grpc_api.kedro_pb2 import (  # type: ignore
+from kedro_grpc_server.kedro_pb2 import (  # type: ignore
     PipelineParams,
     RunId,
     RunParams,
 )
-from kedro_server.grpc_api.kedro_pb2_grpc import KedroStub  # type: ignore
+from kedro_grpc_server.kedro_pb2_grpc import KedroStub  # type: ignore
 
 
 # open a gRPC channel

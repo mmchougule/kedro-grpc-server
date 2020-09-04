@@ -3,14 +3,14 @@ from os import path
 
 from setuptools import find_packages, setup
 
-name = "kedro_server"
+name = "kedro_grpc_server"
 here = path.abspath(path.dirname(__file__))
 
 # get package version
 with open(path.join(here, name, "__init__.py"), encoding="utf-8") as f:
     result = re.search(r'__version__ = ["\']([^"\']+)', f.read())
     if not result:
-        raise ValueError("Can't find the version in kedro_server/__init__.py")
+        raise ValueError("Can't find the version in kedro_grpc_server/__init__.py")
     version = result.group(1)
 
 # get the dependencies and installs
@@ -40,6 +40,6 @@ setup(
     install_requires=requires,
     zip_safe=False,
     entry_points={
-        "kedro.project_commands": ["kedro_server = kedro_server.app:commands"]
+        "kedro.project_commands": ["kedro_grpc_server = kedro_grpc_server.app:commands"]
     },
 )
